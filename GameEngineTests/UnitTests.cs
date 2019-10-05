@@ -35,7 +35,10 @@ namespace GameEngine.Tests
         [TestMethod()]
         public void Unit_AttackNotInRange_ThrowsException()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Unit("Test", 100, 10, 5, (15, 20), 1.0));
+            ulong attack = 10;
+            (ulong, ulong) damage = (15, 20);
+            var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Unit("Test", 100, attack, 5, damage, 1.0));
+            Assert.AreEqual(ex.ActualValue, attack);
         }
     }
 }
