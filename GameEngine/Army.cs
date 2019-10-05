@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GameEngine
 {
-    internal class Army
+    public class Army
     {
         private List<UnitStack> unitStacks;
 

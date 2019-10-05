@@ -24,6 +24,10 @@ namespace GameEngine
             (ulong, ulong) damage,
             double initiative)
         {
+            if (!(damage.Item1 <= attack && attack <= damage.Item2))
+            {
+                throw new ArgumentOutOfRangeException(nameof(attack), attack, $"Attack should be in range of damage [{damage.Item1}, {damage.Item2}]");
+            };
             Type = type ?? throw new ArgumentNullException(nameof(type), "Unit type shoud not be null"); ;
             HitPoints = hitPoints;
             Attack = attack;
