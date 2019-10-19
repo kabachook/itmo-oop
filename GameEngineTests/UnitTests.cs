@@ -31,14 +31,5 @@ namespace GameEngine.Tests
         {
             Assert.ThrowsException<ArgumentNullException>(() => new Unit(null, 100, 10, 5, (7, 13), 1.0));
         }
-
-        [TestMethod()]
-        public void Unit_AttackNotInRange_ThrowsException()
-        {
-            ulong attack = 10;
-            (ulong, ulong) damage = (15, 20);
-            var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => new Unit("Test", 100, attack, 5, damage, 1.0));
-            Assert.AreEqual(ex.ActualValue, attack);
-        }
     }
 }

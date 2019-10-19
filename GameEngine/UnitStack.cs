@@ -13,5 +13,10 @@ namespace GameEngine
             Type = type ?? throw new ArgumentNullException(nameof(type), "Unit type should not be null");
             Count = count;
         }
+
+        public UnitStack Clone()
+        {
+            return new UnitStack(Type, Count);
+        }
     }
 }

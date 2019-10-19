@@ -2,6 +2,6 @@
 {
     public class Griffin: Unit
     {
-        public Griffin(): base("griffin", 30, 7, 5, damage: (7, 12), 15) { }
+        public Griffin(): base("griffin", 30, 7, 5, (7, 12), 15) { }
     }
 }

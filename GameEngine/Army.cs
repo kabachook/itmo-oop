@@ -9,7 +9,7 @@ namespace GameEngine
 
         public List<UnitStack> UnitStacks
         {
-            get => new List<UnitStack>(unitStacks);
+            get => unitStacks.ConvertAll(p => p.Clone());
         }
 
         public Army(List<UnitStack> unitStacks)
@@ -24,7 +24,8 @@ namespace GameEngine
                 throw new ArgumentOutOfRangeException(nameof(unitStacks), unitStacks.Count, "Unit stacks count should be less or equal to 6");
             }
 
-            this.unitStacks = unitStacks;
+            // Make a deep copy
+            this.unitStacks = unitStacks.ConvertAll(p => p.Clone());
         }
     }
 }
