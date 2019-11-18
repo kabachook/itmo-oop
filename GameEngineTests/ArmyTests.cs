@@ -21,7 +21,7 @@ namespace GameEngine.Tests
         }
 
         [TestMethod()]
-        public void Army_ValidArgs_Values()
+        public void Army_ValidArgs_Clones()
         {
             var stacks = new List<UnitStack>
             {
@@ -29,7 +29,8 @@ namespace GameEngine.Tests
                 new UnitStack(new Unit("Test2", 80, 15, 3, (10, 20), 0.8), 10)
             };
             var army = new Army(stacks);
-            CollectionAssert.AreEqual(army.UnitStacks, stacks);
+            // Check if copy was created
+            CollectionAssert.AreNotEqual(army.UnitStacks, stacks);
         }
 
         [TestMethod()]
