@@ -12,7 +12,6 @@ namespace GameEngine
 
         public List<BattleUnitStack> Stacks
         {
-            //get => stacks.ConvertAll(stack => stack.Clone());
             get => stacks;
         }
 
