@@ -6,9 +6,9 @@ namespace GameEngine
     {
         public Unit Type { get; }
 
-        public ulong Count { get; }
+        public int Count { get; }
 
-        public UnitStack(Unit type, ulong count)
+        public UnitStack(Unit type, int count)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type), "Unit type should not be null");
 
