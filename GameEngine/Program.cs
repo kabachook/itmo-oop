@@ -1,6 +1,8 @@
 ﻿using GameEngine.Units;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace GameEngine
 {
@@ -25,15 +27,29 @@ namespace GameEngine
             game.Start();
 
             game.nextMove();
+            Console.WriteLine("Army 1 move");
+            Console.WriteLine(game.currentArmy);
+            Console.WriteLine();
             while (game.Queue.Count() > 0)
             {
                 var stack = game.nextStack();
-                game.Defense(stack);
+                Console.WriteLine($"Move: {stack}");
+                Console.WriteLine($"Stack spells: [{String.Join(',',stack.GetSpells())}]");
+                if (stack.GetSpells().Count > 0)
+                {
+                    var spell = stack.GetSpells().First();
+                    game.UseSpell(stack, stack, spell);
+                }
+                game.Attack(stack, game.Enemy().Stacks);
+                Console.WriteLine();
             }
-            Console.WriteLine(game.currentArmy);
+            
 
             game.nextMove();
-            while(game.Queue.Count() > 0)
+            Console.WriteLine("Army 2 move");
+            Console.WriteLine(game.currentArmy);
+            Console.WriteLine();
+            while (game.Queue.Count() > 0)
             {
                 var stack = game.nextStack();
                 game.Attack(stack, game.Enemy().Stacks);

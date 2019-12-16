@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 using System.Linq;
 
 namespace GameEngine
 {
-    class BattleUnitStack
+    public class BattleUnitStack
     {
         private UnitStack InitialStack { get; }
         private List<IEffect> Effects;
@@ -33,19 +34,36 @@ namespace GameEngine
             Health = InitialStack.Count * InitialStack.Type.HitPoints;
         }
 
-        public void OnAttack()
+        public ImmutableList<ISpell> GetSpells()
         {
-
+            return UnitType.Spells;
         }
 
-        public void OnDefense(int damage)
+        public void DecreaseHealth(int value)
         {
-            Health = Health - damage;
+            Health = Health - value;
             if (Health < 0)
             {
                 Health = 0;
             }
             Count = Health / UnitType.HitPoints;
+        }
+
+        public int OnAttack(BattleUnitStack to)
+        {
+            return Utils.CalculateDamage(this, to);
+        }
+
+        public int OnDefense(BattleUnitStack from, int received)
+        {
+            //var received = Utils.CalculateDamage(from, this);
+
+            DecreaseHealth(received);
+
+            // Calculate damage in return
+            if (Count < 0) return 0;
+
+            return Utils.CalculateDamage(this, from);
         }
 
         public void AddEffect(IEffect effect)
@@ -73,6 +91,9 @@ namespace GameEngine
             Effects = new List<IEffect>();
             _attack = unitStack.Type.Attack;
             _defense = unitStack.Type.Defense;
+
+            // Initialize passive effects *once*
+            UnitType.PassiveEffects.ForEach(effect => effect.Apply(this));
         }
 
         public BattleUnitStack Clone()

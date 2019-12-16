@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace GameEngine
 {
@@ -15,6 +17,9 @@ namespace GameEngine
         public (int, int) Damage { get; }
 
         public double Initiative { get; }
+
+        public ImmutableList<ISpell> Spells = ImmutableList.Create<ISpell>();
+        public ImmutableList<IPassiveEffect> PassiveEffects = ImmutableList.Create<IPassiveEffect>();
 
         public Unit(
             string type,

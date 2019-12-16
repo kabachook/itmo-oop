@@ -99,14 +99,22 @@ namespace GameEngine
         {
             to.ForEach(stack =>
             {
-                var dealt = Utils.CalculateDamage(from, stack);
-                stack.OnDefense(dealt);
+                var dealt = from.OnAttack(stack);
+                var inReturn = stack.OnDefense(from, dealt);
+                from.DecreaseHealth(inReturn);
             });
         }
 
         public void Defense(BattleUnitStack stack)
         {
             stack.AddEffect(new Effects.DefenseBuff(stack));
+        }
+
+        public void UseSpell(BattleUnitStack from, BattleUnitStack to, ISpell spell)
+        {
+            if (!from.GetSpells().Contains(spell)) throw new ArgumentOutOfRangeException("From stack does not contain provided spell");
+            Console.WriteLine($"Using spell {spell}");
+            spell.Apply(to);
         }
 
         public void Start()
