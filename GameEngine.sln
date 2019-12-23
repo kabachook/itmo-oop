@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngineTests", "GameEngineTests\GameEngineTests.csproj", "{902985A3-9323-43F0-8BD5-E58A8BFC9800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameEngineTests", "GameEngineTests\GameEngineTests.csproj", "{902985A3-9323-43F0-8BD5-E58A8BFC9800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngineMod1", "GameEngineMod1\GameEngineMod1.csproj", "{D28B520A-3E85-4AFB-B120-7D028CACA109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{902985A3-9323-43F0-8BD5-E58A8BFC9800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{902985A3-9323-43F0-8BD5-E58A8BFC9800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{902985A3-9323-43F0-8BD5-E58A8BFC9800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D28B520A-3E85-4AFB-B120-7D028CACA109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28B520A-3E85-4AFB-B120-7D028CACA109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28B520A-3E85-4AFB-B120-7D028CACA109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28B520A-3E85-4AFB-B120-7D028CACA109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
