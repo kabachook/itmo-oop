@@ -27,5 +27,10 @@ namespace GameEngine
             // Make a deep copy
             this.unitStacks = unitStacks.ConvertAll(p => p.Clone());
         }
+
+        public BattleArmy ToBattleArmy()
+        {
+            return new BattleArmy(UnitStacks.ConvertAll(x => new BattleUnitStack(x)));
+        }
     }
 }

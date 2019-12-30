@@ -4,15 +4,29 @@ using System.Text;
 
 namespace GameEngine
 {
-    class Battle
+    public class Battle
     {
+        private BattleArmy winner = null;
+        private BattleState state;
         public BattleArmy First;
         public BattleArmy Second;
         public BattleArmy currentArmy;
         public BattleQueue Queue;
-        private BattleArmy winner = null;
-        private BattleState state;
-        private int roundCount = 0;
+        public BattleUnitStack CurrentStack { get; private set; }
+        public BattleArmy Enemy
+        {
+            get {
+                if (currentArmy.Equals(First))
+                {
+                    return Second;
+                }
+                else
+                {
+                    return First;
+                }
+            }
+            
+        }
 
         public bool hasBattleEnded => !First.isAlive || !Second.isAlive || state == BattleState.FINISHED;
 
@@ -30,26 +44,16 @@ namespace GameEngine
 
         public Battle(BattleArmy firstArmy, BattleArmy secondArmy)
         {
-            First = firstArmy.Clone();
-            Second = secondArmy.Clone();
+            First = firstArmy;
+            Second = secondArmy;
             state = BattleState.STOPPED;
         }
 
-        public BattleArmy Enemy()
-        {
-            if (currentArmy.Equals(First))
-            {
-                return Second;
-            }
-            else
-            {
-                return First;
-            }
-        }
+        
 
         private void onMove()
         {
-            if (currentArmy == null || currentArmy.Equals(Second))
+            if (currentArmy == null || currentArmy == Second)
             {
                 currentArmy = First;
             }
@@ -57,8 +61,8 @@ namespace GameEngine
             {
                 currentArmy = Second;
             }
-            roundCount++;
             Queue = new BattleQueue(currentArmy.Stacks);
+            CurrentStack = Queue?.First();
         }
 
         public void nextMove()
@@ -74,7 +78,8 @@ namespace GameEngine
 
         public BattleUnitStack nextStack()
         {
-            return Queue.Next();
+            CurrentStack = Queue.Next();
+            return CurrentStack;
         }
 
         public void Await(BattleUnitStack stack)
@@ -110,16 +115,15 @@ namespace GameEngine
             stack.AddEffect(new Effects.DefenseBuff(stack));
         }
 
-        public void UseSpell(BattleUnitStack from, BattleUnitStack to, ISpell spell)
+        public void UseSpell(BattleUnitStack from, List<BattleUnitStack> to, ISpell spell)
         {
             if (!from.GetSpells().Contains(spell)) throw new ArgumentOutOfRangeException("From stack does not contain provided spell");
             Console.WriteLine($"Using spell {spell}");
-            spell.Apply(to);
+            to.ForEach(stack => spell.Apply(stack));
         }
 
         public void Start()
         {
-            Console.WriteLine("Battle in progress");
             state = BattleState.RUNNING;
             onMove();
         }

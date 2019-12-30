@@ -36,5 +36,10 @@ namespace GameEngine
             Damage = damage;
             Initiative = initiative;
         }
+
+        public override string ToString()
+        {
+            return $"{Type}<HP: {HitPoints}, Attack: {Attack}, Defense: {Defense}, Damage: {Damage}, initiative: {Initiative}>";
+        }
     }
 }

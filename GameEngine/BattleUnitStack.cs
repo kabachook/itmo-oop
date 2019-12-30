@@ -103,7 +103,7 @@ namespace GameEngine
 
         public override string ToString()
         {
-            return $"BattleUnitStack<Type: {UnitType.Type}, Count: {Count}>";
+            return $"{UnitType.Type}<Count: {Count}, Health: {Health}>";
         }
     }
 }

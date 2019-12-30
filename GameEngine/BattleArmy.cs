@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace GameEngine
 {
-    class BattleArmy
+    public class BattleArmy
     {
         private List<BattleUnitStack> InitialStacks { get; }
 
@@ -48,6 +48,11 @@ namespace GameEngine
         public void OnDefence()
         {
 
+        }
+
+        public BattleArmy()
+        {
+            this.stacks = new List<BattleUnitStack>();
         }
 
         public BattleArmy(List<BattleUnitStack> stacks)

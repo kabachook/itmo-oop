@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameEngine
 {
-    class BattleQueue
+    public class BattleQueue
     {
         private readonly Queue<BattleUnitStack> firstQueue;
         private readonly Stack<BattleUnitStack> awaitQueue;
@@ -46,5 +46,27 @@ namespace GameEngine
             awaitQueue.Push(toAwait);
         }
         public int Count() => firstQueue.Count + awaitQueue.Count;
+
+        public BattleUnitStack First()
+        {
+            return firstQueue.Count > 0 ? firstQueue.First() : (awaitQueue.Count > 0 ? awaitQueue.First() : null);
+        }
+
+        public List<BattleUnitStack> ToList()
+        {
+            var queue = new List<BattleUnitStack>();
+
+            foreach(var stack in firstQueue)
+            {
+                queue.Add(stack);
+            }
+
+            foreach (var stack in awaitQueue)
+            {
+                queue.Add(stack);
+            }
+
+            return queue;
+        }
     }
 }
